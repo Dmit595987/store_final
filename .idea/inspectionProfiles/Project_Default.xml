@@ -1,0 +1,17 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="coolsite.women.templatetags.women_tags.women" />
+          <option value="coolsite.women.templatetags.women_tags.Category" />
+          <option value="coolsite.women.templatetags.women_posts.women" />
+          <option value="coolsite.women.templatetags.women_posts.Women" />
+          <option value="coolsite.coolsite.urls.women" />
+          <option value="coolsite.settings" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
