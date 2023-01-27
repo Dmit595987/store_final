@@ -39,11 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # install apps
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
     # pip install django-dump-load-utf8
     'django_dump_load_utf8',
+    # install Allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    # debug toolbar
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -70,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processors.baskets',
+
             ],
         },
     },
@@ -82,9 +92,13 @@ WSGI_APPLICATION = 'store.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "store_db",
+        "USER": "store_username",
+        "PASSWORD": "store_password",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
@@ -143,8 +157,27 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # sending email
-EMAIL_HOST = 'smtp.yandex.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'StoreEmailVerificated@yandex.ru'
-EMAIL_HOST_PASSWORD = 'Di31031959'
-EMAIL_USE_SSL = True
+# EMAIL_HOST = 'smtp.yandex.com'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'StoreEmailVerificated@yandex.ru'
+# EMAIL_HOST_PASSWORD = 'Di31031959'
+# EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# AUTH django-allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+
+        ],
+    }
+}
+INTERNAL_IPS = ['127.0.0.1',  'localhost']
