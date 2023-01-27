@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import  basket_add, basket_remove, IndexView, ProductListView
+
+from .views import IndexView, ProductListView, basket_add, basket_remove
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -10,4 +11,3 @@ urlpatterns = [
     path('baskets/add/<int:product_id>/', basket_add, name='basket_add'),
     path('baskets/remove/<int:basket_id>/', basket_remove, name='basket_remove'),
 ]
-
